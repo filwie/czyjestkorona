@@ -1,0 +1,104 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+.content {
+    position: relative;
+}
+
+.bg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info {
+    position: absolute;
+    z-index: 9999;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15em;
+    font-style: bold;
+
+}
+
+#nie {
+    color: #B8BA37;
+    text-shadow: 3px 3px 0px #989629;
+}
+.p > #tak {
+    color: #F84B3C;
+    text-shadow: 3px 3px 0px #CA2726;
+}
+
+.flying-virus {
+    pointer-events: none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+
+$number-of-viruses: 10;
+
+@for $i from 1 through $number-of-viruses {
+  $flight-duration: 5s + 10s * $i;
+  $hue-rotation: 10deg * $i;
+  $size: 10em + $i;
+
+  #virus#{$i} {
+    width: $size;
+    height: $size;
+    animation: fly $flight-duration linear infinite;
+    animation-delay: #{$i}s;
+    transform: translateX(-120%) translateY(-120%) rotateZ(180deg + 10deg * $i);
+
+    // transform color https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element
+    filter: hue-rotate($hue-rotation);
+  }
+}
+
+
+@keyframes fly {
+
+    98.001%, 0% {
+        display: block;
+        transform: translateX(-200%) translateY(100vh) rotateZ(0deg)
+    }
+
+    15% {
+        transform: translateX(100vw) translateY(-100%) rotateZ(180deg)
+    }
+
+    15.001%, 18% {
+        transform: translateX(100vw) translateY(-30%) rotateZ(0deg)
+    }
+
+    40% {
+        transform: translateX(-200%) translateY(3vh) rotateZ(-180deg)
+    }
+
+    40.001%, 43% {
+        transform: translateX(-200%) translateY(-100%) rotateZ(-180deg)
+    }
+
+    65% {
+        transform: translateX(100vw) translateY(50vh) rotateZ(0deg)
+    }
+
+    65.001%, 68% {
+        transform: translateX(20vw) translateY(-200%) rotateZ(180deg)
+    }
+
+    95% {
+        transform: translateX(10vw) translateY(100vh) rotateZ(0deg)
+    }
+}
